@@ -43,8 +43,11 @@ define( 'BOOK_MANAGEMENT_PLUGIN_URL',  plugin_dir_url( __FILE__ ));
  * This action is documented in includes/class-book-management-activator.php
  */
 function activate_book_management() {
+	
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-book-management-activator.php';
-	Book_Management_Activator::activate();
+	$activator = new Book_Management_Activator();
+	$activator->activate();
+
 }
 
 /**
@@ -52,8 +55,15 @@ function activate_book_management() {
  * This action is documented in includes/class-book-management-deactivator.php
  */
 function deactivate_book_management() {
+	
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-book-management-activator.php';
+	$activator = new Book_Management_Activator();
+
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-book-management-deactivator.php';
-	Book_Management_Deactivator::deactivate();
+	$deactivator  = new Book_Management_Deactivator($activator);
+	$deactivator->deactivate();
+	
+	
 }
 
 register_activation_hook( __FILE__, 'activate_book_management' );
