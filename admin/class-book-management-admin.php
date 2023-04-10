@@ -75,7 +75,10 @@ class Book_Management_Admin {
 
 		$valid_pages = array(
 			"book-management-tool",
-			"book-management-create-book-shelf"
+			"book-management-create-book-shelf",
+			"book-management-list-book-shelf",
+			"book-management-create-book",
+			"book-management-list-book"
 		);
 		 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
 
@@ -125,7 +128,10 @@ class Book_Management_Admin {
 
 		$valid_pages = array(
 			"book-management-tool",
-			"book-management-create-book-shelf"
+			"book-management-create-book-shelf",
+			"book-management-list-book-shelf",
+			"book-management-create-book",
+			"book-management-list-book"
 		);
 		 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
 		 if(in_array($page,$valid_pages)){
@@ -149,6 +155,17 @@ class Book_Management_Admin {
 				BOOK_MANAGEMENT_PLUGIN_URL . '/assets/js/sweetalert.min.js',  
 				array( 'jquery' ), $this->version, false 
 			);
+
+			wp_enqueue_script( 
+				$this->plugin_name, 
+				plugin_dir_url( __FILE__ ) . 'js/book-management-admin.js', 
+				array( 'jquery' ), $this->version, false );
+
+				wp_localize_script($this->plugin_name, "smc_book",array(
+					"name" => "Smart Coder",
+					"author" => "Raihan Islam",
+					"ajaxurl" => admin_url("admin-ajax.php")
+				));
 
 		 }
 		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/book-management-admin.js', array( 'jquery' ), $this->version, false );
@@ -183,15 +200,33 @@ class Book_Management_Admin {
 
 
 	public function book_management_create_book_shelf(){
-		echo "Create Book shelf";
+		ob_start();
+		
+		include_once(BOOKS_MANAGEMENT_TOOL_PLUGIN_PATH."admin/partials/temp-create-book-shelf.php");
+
+		$template = ob_get_contents();
+
+		ob_end_clean();
+
+		echo $template;
 	}
 
 	public function book_management_list_book_shelf(){
-		echo "list Book shelf";
+
+		//echo "ashdbhasdbasd";
+		ob_start();
+		
+		include_once(BOOKS_MANAGEMENT_TOOL_PLUGIN_PATH."admin/partials/temp-list-book-shelf.php");
+
+		$template = ob_get_contents();
+
+		ob_end_clean();
+
+		echo $template;
 	}
 
 	public function book_management_create_book(){
-		echo "Create Book Page";
+		
 	}
 
 	public function book_management_list_book(){
@@ -221,6 +256,24 @@ class Book_Management_Admin {
 	//   echo "<pre>";
 	//   print_r($user_data);
 	
+	}
+
+
+	public function handle_ajax_requests_admin(){
+		
+		$param = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
+		if(!empty($param )) {
+			if($param == "first_simple_ajax"){
+				echo json_encode(array(
+					"status" => 1,
+					"message" => "first ajax request",
+					"data" => array(
+						"name" => "Smart Coder",
+						"author" => "raihan"
+					)
+				));
+			}
+		}
 	}
 
 }

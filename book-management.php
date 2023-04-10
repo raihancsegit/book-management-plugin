@@ -37,7 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'BOOK_MANAGEMENT_VERSION', '1.0.0' );
 define( 'BOOK_MANAGEMENT_PLUGIN_URL',  plugin_dir_url( __FILE__ ));
-
+define('BOOKS_MANAGEMENT_TOOL_PLUGIN_PATH', plugin_dir_path(__FILE__));
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-book-management-activator.php
