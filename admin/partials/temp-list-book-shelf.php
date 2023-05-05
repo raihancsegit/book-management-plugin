@@ -15,21 +15,32 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        <?php
+                if(count($book_shelf) > 0){
+                    foreach($book_shelf as $index=>$data){
+               
+                ?>
                         <tr>
-                            <th>1</th>
-                            <th>name</th>
-                            <th>capacity</th>
-                            <th>shelf_name</th>
+                            <th><?php echo $data->id;?></th>
+                            <th><?php echo $data->shelf_name;?></th>
+                            <th><?php echo $data->capacity;?></th>
+                            <th><?php echo $data->shelf_location;?></th>
                             <th>
-
-                                <button class="btn btn-danger">active</button>
-
+                                <?php 
+                                  if($data->status){
+                                ?>
+                                <button class="btn btn-success">Active</button>
+                                <?php } else{?>
+                                <button class="btn btn-danger">Inactive</button>
+                                <?php } ?>
                             </th>
                             <th><button class="btn btn-danger btn-delete-book-shelf" data-id=“id”>Delete</button></th>
                         </tr>
 
-
+                        <?php 
+                    }
+                }
+                    ?>
                     </tbody>
                     <tfoot>
                         <tr>

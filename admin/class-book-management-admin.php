@@ -39,7 +39,7 @@ class Book_Management_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-
+	private $table_activator;
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -52,7 +52,12 @@ class Book_Management_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		require_once BOOKS_MANAGEMENT_TOOL_PLUGIN_PATH . 'includes/class-book-management-activator.php';
+	    $activator = new Book_Management_Activator();
+		$this->table_activator = $activator;
+
 	}
+
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -135,6 +140,9 @@ class Book_Management_Admin {
 		);
 		 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
 		 if(in_array($page,$valid_pages)){
+
+			wp_enqueue_script("jquery");
+			
 			wp_enqueue_script( 
 				'book-bootstrapjs', 
 				BOOK_MANAGEMENT_PLUGIN_URL . '/assets/js/bootstrap.min.js',  
@@ -213,6 +221,13 @@ class Book_Management_Admin {
 
 	public function book_management_list_book_shelf(){
 
+		global $wpdb;
+
+		$book_shelf = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM " .$this->table_activator->wp_smc_tbl_book_shelf(),"" 
+			)
+			);
 		//echo "ashdbhasdbasd";
 		ob_start();
 		
@@ -260,7 +275,7 @@ class Book_Management_Admin {
 
 
 	public function handle_ajax_requests_admin(){
-		
+		global $wpdb;
 		$param = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
 		if(!empty($param )) {
 			if($param == "first_simple_ajax"){
@@ -272,8 +287,38 @@ class Book_Management_Admin {
 						"author" => "raihan"
 					)
 				));
+			}elseif($param == "create_book_shelf"){
+
+				// get all data from form
+				$name = isset($_REQUEST['txt_name']) ? $_REQUEST['txt_name'] : "";
+				$capacity = isset($_REQUEST['txt_capacity']) ? $_REQUEST['txt_capacity'] : "";
+				$location = isset($_REQUEST['txt_location']) ? $_REQUEST['txt_location'] : "";
+				$status = isset($_REQUEST['dd_status']) ? $_REQUEST['dd_status'] : "";
+
+				$wpdb->insert($this->table_activator->wp_smc_tbl_book_shelf(), array(
+					"shelf_name" => $name,
+					"capacity" => $capacity,
+					"shelf_location" => $location,
+					"status" => $status
+				));
+
+				if($wpdb->insert_id > 0){
+
+					echo json_encode(array(
+						"status" => 1,
+						"message" => "Book Shelf created successfully"
+					));
+				}else{
+
+					echo json_encode(array(
+						"status" => 0,
+						"message" => "Failed to create book shelf"
+					));
+				}
+
 			}
 		}
+
 	}
 
 }
