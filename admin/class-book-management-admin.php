@@ -316,6 +316,25 @@ class Book_Management_Admin {
 					));
 				}
 
+			}elseif($param == "delete_book_shelf"){
+				
+				$shelf_id = isset($_REQUEST['shelf_id']) ? $_REQUEST['shelf_id'] : 0;
+				if($shelf_id > 0){
+					$wpdb->delete($this->table_activator->wp_smc_tbl_book_shelf(),array(
+						"id" => $shelf_id
+					));
+
+					echo json_encode(array(
+						"status" => 1,
+						"message" => "Book Shelf Delete successfully"
+					));
+				}else {
+					echo json_encode(array(
+						"status" => 0,
+						"message" => "Failed to delete book shelf"
+					));
+				}
+
 			}
 		}
 

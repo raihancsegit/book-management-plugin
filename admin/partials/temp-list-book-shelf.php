@@ -34,7 +34,10 @@
                                 <button class="btn btn-danger">Inactive</button>
                                 <?php } ?>
                             </th>
-                            <th><button class="btn btn-danger btn-delete-book-shelf" data-id=“id”>Delete</button></th>
+                            <th>
+                                <button class="btn btn-danger btn-delete-book-shelf"
+                                    data-id=“<?php  echo $data->id;?>”>Delete</button>
+                            </th>
                         </tr>
 
                         <?php 

@@ -32,4 +32,27 @@ jQuery(function () {
       });
     },
   });
+
+  // Delete Book Shelf
+
+  jQuery(document).on("click", ".btn-delete-book-shelf", function () {
+    var self_id = jQuery(this).attr("data-id");
+    //alert(self_id);
+    var conf = confirm("Are You want to delete?");
+    if (conf) {
+      postdata =
+        "&action=admin_ajax_request&param=delete_book_shelf&shelf_id=" +
+        self_id;
+      jQuery.post(ajaxurl, postdata, function (response) {
+        // var data = jQuery.parseJSON(response);
+        // if (data.status == 1) {
+        //   alert(data.message);
+        //   setTimeout(function () {
+        //     location.reload();
+        //   }, 1000);
+        // }
+        console.log(response);
+      });
+    }
+  });
 });
