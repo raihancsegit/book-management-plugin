@@ -1,16 +1,9 @@
 jQuery(function () {
   var ajaxurl = smc_book.ajaxurl;
 
-  jQuery("#tbl-list-book-shelf").DataTable();
-  // processing event on button click
-  jQuery(document).on("click", "#btn-first-ajax", function () {
-    var postdata = "action=admin_ajax_request&param=first_simple_ajax";
+  jQuery("#tbl-list-book").DataTable();
 
-    jQuery.post(ajaxurl, postdata, function (response) {
-      alert("working");
-      console.log(response);
-    });
-  });
+  jQuery("#tbl-list-book-shelf").DataTable();
 
   // create book shelf code
   jQuery("#frm-add-book-shelf").validate({
@@ -33,26 +26,35 @@ jQuery(function () {
     },
   });
 
-  // Delete Book Shelf
+  //delete book shelf data
 
   jQuery(document).on("click", ".btn-delete-book-shelf", function () {
     var self_id = jQuery(this).attr("data-id");
-    //alert(self_id);
-    var conf = confirm("Are You want to delete?");
+    var conf = confirm("Are you sure want to detele?");
     if (conf) {
-      postdata =
-        "&action=admin_ajax_request&param=delete_book_shelf&shelf_id=" +
-        self_id;
+      var postdata =
+        "action=admin_ajax_request&param=delete_book_shelf&shelf_id=" + self_id;
+
       jQuery.post(ajaxurl, postdata, function (response) {
-        // var data = jQuery.parseJSON(response);
-        // if (data.status == 1) {
-        //   alert(data.message);
-        //   setTimeout(function () {
-        //     location.reload();
-        //   }, 1000);
-        // }
-        console.log(response);
+        var data = jQuery.parseJSON(response);
+
+        if (data.status == 1) {
+          alert(data.message);
+
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
+        }
       });
     }
+  });
+
+  // processing event on button click
+  jQuery(document).on("click", "#btn-first-ajax", function () {
+    var postdata = "action=admin_ajax_request&param=first_simple_ajax";
+
+    jQuery.post(ajaxurl, postdata, function (response) {
+      console.log(response);
+    });
   });
 });

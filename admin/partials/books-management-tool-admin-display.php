@@ -5,11 +5,11 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://raihan.website
+ * @link       http://smartcoder.blogspot.com/
  * @since      1.0.0
  *
- * @package    Book_Management
- * @subpackage Book_Management/admin/partials
+ * @package    Books_Management_Tool
+ * @subpackage Books_Management_Tool/admin/partials
  */
 ?>
 

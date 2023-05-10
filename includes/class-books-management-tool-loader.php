@@ -3,11 +3,11 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://raihan.website
+ * @link       http://smartcoder.blogspot.com/
  * @since      1.0.0
  *
- * @package    Book_Management
- * @subpackage Book_Management/includes
+ * @package    Books_Management_Tool
+ * @subpackage Books_Management_Tool/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Book_Management
- * @subpackage Book_Management/includes
- * @author     Raihan Islam <raihanislam.cse@gmail.com>
+ * @package    Books_Management_Tool
+ * @subpackage Books_Management_Tool/includes
+ * @author     Online Web Tutor <smartcoder@gmail.com>
  */
-class Book_Management_Loader {
+class Books_Management_Tool_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

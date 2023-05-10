@@ -15,35 +15,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                if(count($book_shelf) > 0){
-                    foreach($book_shelf as $index=>$data){
-               
-                ?>
+                        <?php 
+                if(count($book_shelf) > 0 ){
+                    foreach($book_shelf as $index =>$data){
+                        ?>
                         <tr>
-                            <th><?php echo $data->id;?></th>
-                            <th><?php echo $data->shelf_name;?></th>
-                            <th><?php echo $data->capacity;?></th>
-                            <th><?php echo $data->shelf_location;?></th>
+                            <th><?php echo $data->id?></th>
+                            <th><?php echo strtoupper($data->shelf_name); ?></th>
+                            <th><?php echo $data->capacity?></th>
+                            <th><?php echo strtoupper($data->shelf_name); ?></th>
                             <th>
-                                <?php 
-                                  if($data->status){
-                                ?>
-                                <button class="btn btn-success">Active</button>
-                                <?php } else{?>
+                                <?php
+                                if($data->status){
+                                    ?>
+                                <button class="btn btn-info">Active</button>
+                                <?php
+                                }else {
+                                    ?>
                                 <button class="btn btn-danger">Inactive</button>
-                                <?php } ?>
+                                <?php
+                                }
+                                ?>
                             </th>
                             <th>
                                 <button class="btn btn-danger btn-delete-book-shelf"
-                                    data-id=“<?php  echo $data->id;?>”>Delete</button>
+                                    data-id="<?php echo $data->id?>">Delete</button>
                             </th>
                         </tr>
 
-                        <?php 
+                        <?php
                     }
                 }
-                    ?>
+            ?>
                     </tbody>
                     <tfoot>
                         <tr>

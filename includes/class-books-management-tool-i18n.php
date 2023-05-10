@@ -6,11 +6,11 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://raihan.website
+ * @link       http://smartcoder.blogspot.com/
  * @since      1.0.0
  *
- * @package    Book_Management
- * @subpackage Book_Management/includes
+ * @package    Books_Management_Tool
+ * @subpackage Books_Management_Tool/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Book_Management
- * @subpackage Book_Management/includes
- * @author     Raihan Islam <raihanislam.cse@gmail.com>
+ * @package    Books_Management_Tool
+ * @subpackage Books_Management_Tool/includes
+ * @author     Online Web Tutor <smartcoder@gmail.com>
  */
-class Book_Management_i18n {
+class Books_Management_Tool_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Book_Management_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'book-management',
+			'books-management-tool',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
