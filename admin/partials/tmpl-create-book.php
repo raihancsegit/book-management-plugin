@@ -13,7 +13,15 @@
                         <div class="col-sm-4">
                             <select class="form-control" required="" name="dd_book_shelf">
                                 <option value="">Choose Shelf</option>
-
+                                <?php 
+                                    if(count($book_shelf) > 0){
+                                        foreach( $book_shelf as $key=>$value){
+                                            ?>
+                                <option value="<?php echo $value->id?>"><?php echo $value->shelf_name;?></option>
+                                <?php
+                                        }
+                                    }
+                                ?>
                             </select>
                         </div>
                     </div>

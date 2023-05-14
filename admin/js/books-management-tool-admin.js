@@ -5,6 +5,22 @@ jQuery(function () {
 
   jQuery("#tbl-list-book-shelf").DataTable();
 
+  jQuery(document).on("click", "#txt_image", function () {
+    var image = wp
+      .media({
+        title: "Upload Book Image",
+        multiple: false,
+      })
+      .open()
+      .on("select", function (e) {
+        var upload_image = image.state().get("selection").first();
+        var imagejson = upload_image.toJSON();
+        //console.log(imagejson);a
+        jQuery("#book_image").attr("src", imagejson.url);
+        jQuery("#book_cover_image").val(imagejson.url);
+      });
+  });
+
   // create book shelf code
   jQuery("#frm-add-book-shelf").validate({
     submitHandler: function () {
